@@ -9,6 +9,12 @@ class Db{
 
 	public $connected = false; //Do we have an active connection?
 	private $link = null; //Storing the link to the database
+	
+	//Create a connection to our database
+	public function connect($host, $username, $password, $db){ 
+		$this->link = mysqli_connect($host, $username, $password, $db) or die("Error: " . mysqli_error($this->link));
+		$this->connected = true;
+	}
 
 	//get a singular client
 	public function getClient($clientId){
@@ -38,12 +44,6 @@ class Db{
   			return $row; //only care about the first item, there only should be one
 		}
 
-	}
-
-	//Create a connection to our database
-	public function connect($host, $username, $password, $db){ 
-		$this->link = mysqli_connect($host, $username, $password, $db) or die("Error: " . mysqli_error($this->link));
-		$this->connected = true;
 	}
 
 	//Get all clients from the clients table
